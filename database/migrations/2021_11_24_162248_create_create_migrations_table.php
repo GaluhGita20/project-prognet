@@ -14,9 +14,9 @@ class CreateCreateMigrationsTable extends Migration
     public function up()
     {
         DB::unprepared('
-                CREATE TRIGGER tr_after_register_user AFTER INSERT ON `users` FOR EACH ROW
+                CREATE TRIGGER tr_after_register_user AFTER INSERT ON users FOR EACH ROW
                     BEGIN
-                        INSERT INTO `histories`(`user_id`, `log`, `created_at`, `updated_at`) VALUES (NEW.id, "Akun user berhasil dibuat!", NOW(), NOW());
+                        INSERT INTO histories(user_id, log, created_at, updated_at) VALUES (NEW.id, "Akun user berhasil dibuat!", NOW(), NOW());
                     END
                 ');
     }
@@ -27,7 +27,7 @@ class CreateCreateMigrationsTable extends Migration
      * @return void
      */
     public function down()
-    {
-        DB::unprepared('DROP TRIGGER `tr_after_register_user`');
+    { 
+        DB::unprepared('DROP TRIGGER tr_after_register_user');
     }
 }
