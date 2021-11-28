@@ -26,23 +26,18 @@ class BungaController extends Controller
 
     public function save_newbunga(Request $request)
     {
-        $fileName=time().'.'.$request->file->extension();
-        $request->file('file')->storeAs('public', $fileName);
-        $nasabahs=Nasabah::create([
-            'name'=>$request->name,
-            'alamat'=>$request->alamat,
-            'no_ktp'=>$request->no_ktp,
-            'telepon'=>$request->telepon,
-            'status_aktif'=>$request->status_aktif,
-            'saldo'=>0,
-            'file'=>$fileName
+        $bunga=TrxBunga::create([
+            'bulan'=>$request->bulan,
+            'tahun'=>$request->tahun,
+            'nasabah_id'=>$request->nasabah_id,
+            'nominal_bunga'=>$request->nominal_bunga/100,
             ]);
         $user = Auth::user();
         $log=History::create([
             'user_id'=>$user->id,
-            'log'=>'User berhasil menambahkan data nasabah baru'
+            'log'=>'User berhasil menambahkan data bunga baru untuk nasabah id '. $request->nasabah_id
         ]);
-        return redirect()->route('list-bunga')->with(['success' => 'Data Nasabah atas nama ' . $request->name . ' berhasil ditambahkan!']);
+        return redirect()->route('list-bunga')->with(['success' => 'Data bunga atas nasabah id' . $request->nasabah_id . ' berhasil ditambahkan!']);
     }
 
     public function edit_bunga($id)

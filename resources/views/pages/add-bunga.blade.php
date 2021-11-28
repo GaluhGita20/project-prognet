@@ -62,18 +62,22 @@
                       <div class="form-group">
                         <label class="text-label">Nasabah Id*</label>
                         <div class="dropdown bootstrap-select form-control dropup">
-                          <select name="nasabah_id" id="nasabah_id" class="form-control" tabindex="-98">
-                            <option selected value="" disabled>Pilih nasabah dari transaksi bunga</option>
-                            @foreach($nasabahs as $nasabah)
+                          <select name="nasabah_id" id="nasabah_id" class="form-control" tabindex="-98">                    
+                            @if($nasabahs->count() == 0)
+                              <option selected value="" disabled>Theres no nasabah found on  database</option>
+                            @else
+                              <option selected value="" disabled>Pilih nasabah dari transaksi bunga</option>
+                              @foreach($nasabahs as $nasabah)
                               <option value="{{$nasabah->id}}">{{$nasabah->name}}</option>
-                            @endforeach
+                              @endforeach
+                            @endif    
                           </select>
                         </div>
                       </div>
                     </div>
                     <div class="col-lg-6 mb-2">
                       <div class="form-group">
-                        <label class="text-label">Nominal Bunga*</label>
+                        <label class="text-label">Nominal Bunga (%)*</label>
                         <input type="text" class="form-control" id="nominal_bunga" name="nominal_bunga" aria-describedby="inputGroupPrepend2" placeholder="0-100" required>
                       </div>
                     </div>

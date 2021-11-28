@@ -15,6 +15,6 @@ class TransaksiController extends Controller
     {
         $nasabahs = Nasabah::all();
         $user = Auth::user();
-        return 'hello'.$user->name;
+        return view('pages.table-transaksi', compact('nasabahs'));
     }
 }
