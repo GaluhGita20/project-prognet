@@ -124,7 +124,7 @@
       <div class="deznav-scroll">
         <ul class="metismenu" id="menu">
           <li >
-            <a class="ai-icon" href="javascript:void()" aria-expanded="false">
+            <a class="ai-icon" href="/" aria-expanded="false">
               <i class="flaticon-381-television"></i><span class="nav-text">Dashboard</span>
             </a>
           </li>

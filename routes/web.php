@@ -21,8 +21,8 @@ Route::get('/logout', function () {
 });
 
 Route::group(['middleware'=>'auth'], function(){
-    Route::get('/', [App\Http\Controllers\NasabahController::class, 'index']);
-    Route::get('/home', [App\Http\Controllers\NasabahController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     // nasabah
     Route::get('/nasabah', [App\Http\Controllers\NasabahController::class, 'index'])->name('list-nasabah');
 

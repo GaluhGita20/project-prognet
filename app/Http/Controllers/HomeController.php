@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.table-nasabah');
+        return view('pages.dashboard');
     }
 
     public function add_user()
