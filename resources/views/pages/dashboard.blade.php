@@ -63,7 +63,7 @@
             <div class="profile-photo">
               <img src="#" width="200" class="img-fluid rounded-circle" alt="">
             </div>
-            <h3 class="mt-3 mb-1 text-white">Rizki Aditiya Gilang Ramadhan</h3>
+            <h3 class="mt-3 mb-1 text-white">Rizki Aditiya Gilang R.</h3>
             <p class="text-white mb-0">Anggota</p>
           </div>
           <ul class="list-group list-group-flush">
@@ -105,7 +105,7 @@
             <div class="profile-photo">
               <img src="#" width="200" class="img-fluid rounded-circle" alt="">
             </div>
-            <h3 class="mt-3 mb-1 text-white">I Made Pandhya Putra Kurniawan</h3>
+            <h3 class="mt-3 mb-1 text-white">I Made Pandhya Putra K.</h3>
             <p class="text-white mb-0">Anggota</p>
           </div>
           <ul class="list-group list-group-flush">
