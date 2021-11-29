@@ -147,7 +147,7 @@
             </a>
           </li>
           <li class="{{ (request()->segment(1)=='transaksi')  ? 'active-no-child' : '' }}">
-            <a href="{{Route('list-transaksi')}}" class="ai-icon" aria-expanded="false">
+            <a href="{{Route('view-transaksi')}}" class="ai-icon" aria-expanded="false">
               <i class="flaticon-381-notepad"></i>
               <span class="nav-text">Transaksi</span>
             </a>

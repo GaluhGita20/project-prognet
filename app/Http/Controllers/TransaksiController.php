@@ -15,6 +15,21 @@ class TransaksiController extends Controller
     {
         $nasabahs = Nasabah::all();
         $user = Auth::user();
-        return view('pages.table-transaksi', compact('nasabahs'));
+        return view('pages.table-transaksi-user', compact('nasabahs'));
+    }
+
+    public function list_transaksi_user($id)
+    {
+        $nasabahs = Nasabah::find($id)->get();
+        $trxs = TrxSimpanan::where('nasabah_id', '=', $id)->get();
+        $bungas = TrxBunga::where('nasabah_id', '=', $id)->get();
+        return view('pages.table-transaksi-user-detail')->with(compact('nasabahs', 'trxs'));
+    }
+
+    public function create_trx($id)
+    {
+        $nasabahs = Nasabah::find($id)->get();
+        // $user = Auth::user();
+        return view('pages.add-transaksi')->with(compact('nasabahs'));
     }
 }

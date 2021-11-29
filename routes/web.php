@@ -35,7 +35,9 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/nasabah-{id}/dete', [App\Http\Controllers\NasabahController::class, 'delete_nasabah'])->name('delete_nasabah');
 
     // transaksi
-    Route::get('/transaksi', [App\Http\Controllers\TransaksiController::class, 'index'])->name('list-transaksi');
+    Route::get('/transaksi', [App\Http\Controllers\TransaksiController::class, 'index'])->name('view-transaksi');
+    Route::get('/transaksi/user-{id}', [App\Http\Controllers\TransaksiController::class, 'list_transaksi_user'])->name('list-transaksi-user');
+    Route::get('/transaksi/add-transaksi-{id}', [App\Http\Controllers\TransaksiController::class, 'create_trx'])->name('create_trx');
 
     //bunga
     Route::get('/bunga', [App\Http\Controllers\BungaController::class, 'index'])->name('list-bunga');
