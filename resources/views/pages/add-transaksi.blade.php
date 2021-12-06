@@ -20,6 +20,11 @@
         <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Data</a></li>
       </ol>
     </div>
+    @if(session()->has('success'))
+    <div class="alert alert-success mt-2">
+        {{ session()->get('success') }}
+    </div>
+    @endif
     <!-- row -->
     <div class="row">
       <div class="col-xl-12 col-xxl-12">
@@ -28,7 +33,7 @@
             <h4 class="card-title">Form Data Transaksi</h4>
           </div>
           <div class="card-body">
-            <form action="" method="POST" id="step-form-horizontal" class="step-form-horizontal" enctype="multipart/form-data">
+            <form action="{{Route('savecreate_trx')}}" method="POST" id="step-form-horizontal" class="step-form-horizontal" enctype="multipart/form-data">
               @csrf
               <div>
                 <section>
@@ -49,19 +54,20 @@
                     <div class="col-lg-6 mb-2">
                       <div class="form-group">
                         <label class="text-label">Id Nasabah*</label>
-                        <input type="text" class="form-control" id="nasabah_id" name="nasabah_id" aria-describedby="inputGroupPrepend2" value="{{$nasabah->id}} - {{$nasabah->name}}" readonly>
+                        <input type="text" class="form-control" id="nasabah_id" name="nasabah_id" aria-describedby="inputGroupPrepend2" value="{{$nasabah->id}}" readonly>
                       </div>        
                     </div>
                     <div class="col-lg-6 mb-2">
                       <div class="form-group">
                         <label class="text-label">Tanggal*</label>
-                        <input type="datetime-local" class="form-control" id="tanggal" name="tanggal" aria-describedby="inputGroupPrepend2" value="<?php echo strftime('%Y-%m-%dT%H:%M:%S', time()); ?>" readonly>
+                        <input type="datetime-local" class="form-control" aria-describedby="inputGroupPrepend2" value="<?php echo strftime('%Y-%m-%dT%H:%M:%S', time()); ?>" readonly>
                       </div>
                     </div>
                     <div class="col-lg-12 mb-2">
                       <div class="form-group">
                         <label class="text-label">Nominal Transaksi*</label>
-                        <input type="text" class="form-control" id="nominal_bunga" name="nominal_bunga" aria-describedby="inputGroupPrepend2" placeholder="Rp.0,00" required>
+                        <input type="text" class="form-control" id="nominal_transaksi" name="nominal_trx" aria-describedby="inputGroupPrepend2" placeholder="Rp.0,00" required>
+                        <p>Rp.<label class="text-label" id="real_nominal_transaksi">0</label>,00</p>
                       </div>
                     </div>
                     <div class="col-lg-12 mb-3">
@@ -79,14 +85,33 @@
 </div>
 @endforeach
 <script type="text/javascript">
-  const realFileBtn = document.getElementById("foto_nasabah");
-  const customTxt = document.getElementById("custom-text")
+var rupiah = document.getElementById("nominal_transaksi");
+const nominalReal = document.getElementById("real_nominal_transaksi");
+rupiah.addEventListener("input", function(e) {
+  // tambahkan 'Rp.' pada saat form di ketik
+  // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+  // nominalReal.innerHTML = this.value;
+  nominalReal.innerHTML = formatRupiah(this.value);
+  
+});
 
-  realFileBtn.addEventListener("change", function(){
-    if(realFileBtn.value){
-      customTxt.innerHTML = realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1];
-    }
-  });
+/* Fungsi formatRupiah */
+function formatRupiah(angka, prefix) {
+  var number_string = angka.replace(/[^,\d]/g, "").toString(),
+    split = number_string.split(","),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substr(0, sisa),
+    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+  // tambahkan titik jika yang di input sudah menjadi angka ribuan
+  if (ribuan) {
+    separator = sisa ? "." : "";
+    rupiah += separator + ribuan.join(".");
+  }
+
+  rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+  return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
+}
 </script>
 
 <!--**********************************

@@ -10,7 +10,6 @@ class TrxSimpanan extends Model
     use HasFactory;
     protected $table="trx_simpanans";
     protected $fillable=[
-        'tanggal',
         'jenis_trx',
         'nasabah_id',
         'nominal_trx',

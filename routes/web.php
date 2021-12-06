@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,10 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('/nasabah-{id}/dete', [App\Http\Controllers\NasabahController::class, 'delete_nasabah'])->name('delete_nasabah');
 
     // transaksi
-    Route::get('/transaksi', [App\Http\Controllers\TransaksiController::class, 'index'])->name('view-transaksi');
-    Route::get('/transaksi/user-{id}', [App\Http\Controllers\TransaksiController::class, 'list_transaksi_user'])->name('list-transaksi-user');
-    Route::get('/transaksi/add-transaksi-{id}', [App\Http\Controllers\TransaksiController::class, 'create_trx'])->name('create_trx');
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('view-transaksi');
+    Route::get('/transaksi/user-{id}', [TransaksiController::class, 'list_transaksi_user'])->name('list-transaksi-user');
+    Route::get('/transaksi/add-transaksi-{id}', [TransaksiController::class, 'create_trx'])->name('create_trx');
+    Route::post('/transaksi/save-add-transaksi', [TransaksiController::class, 'savecreate_trx'])->name('savecreate_trx');
 
     //bunga
     Route::get('/bunga', [App\Http\Controllers\BungaController::class, 'index'])->name('list-bunga');

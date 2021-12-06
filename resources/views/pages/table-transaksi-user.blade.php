@@ -38,12 +38,12 @@
     </div>
     <div class="row" style="width:100%">
       @foreach ($nasabahs as $nasabah)
-      <a href="{{Route('list-transaksi-user', $nasabah->id)}}"><div class="col-xl-2 col-lg-6 col-md-6 col-sm-6">
+      <div class="col-xl-2 col-lg-6 col-md-6 col-sm-6">
         <div class="card" style="cursor:pointer">
           <div class="card-body">
             <div class="new-arrival-product">
               <div class="new-arrivals-img-contnent">
-                  <a href="{{Route('list-transaksi-user', $nasabah->id)}}"><img class="img-fluid" src="{{asset('../storage/'.$nasabah->file)}}" style="width:100%; height:150px;" alt=""></a>
+                  <a href="{{Route('list-transaksi-user', $nasabah->id)}}"><img class="img-fluid" src="{{asset('../storage/'.$nasabah->file)}}" style="width:100%; height:100px;" alt=""></a>
               </div>
               <div class="new-arrival-content text-center mt-3">
                 <h4><a href="#" class="text-black">{{$nasabah->name}}</a></h4>
@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-      </div></a>
+      </div>
       @endforeach
     </div>
   </div>

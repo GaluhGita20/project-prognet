@@ -15,7 +15,7 @@ class CreateTrxSimpanansTable extends Migration
     {
         Schema::create('trx_simpanans', function (Blueprint $table) {
             $table->id();
-            $table->datetime('tanggal');
+            $table->timestamp('tanggal');
             $table->enum('jenis_trx', ['Simpanan', 'Penarikan', 'Koreksi']);
             $table->unsignedBiginteger('nasabah_id')->unsigned();
             $table->foreign('nasabah_id')->references('id')->on('nasabahs')->onDelete('cascade');

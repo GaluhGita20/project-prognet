@@ -3,6 +3,11 @@
   $debit=0;
   $kredit=0;
   $saldo=0;
+
+  function rupiah ($angka) {
+    $hasil = 'Rp ' . number_format($angka, 0, ",", ".");
+    return $hasil;
+  }
 ?>
 
 @extends('layouts.template')
@@ -35,7 +40,7 @@
               </span>
               <div class="media-body">
                 <p class="mb-1">Saldo</p>
-                <h4 class="mb-0">Rp.{{$nasabah->saldo}},00</h4>
+                <h4 class="mb-0"><?php echo rupiah($nasabah->saldo); ?></h4>
                 <span class="badge badge-primary"></span>
               </div>
             </div>
@@ -153,8 +158,7 @@
               <table class="table verticle-middle table-responsive-md">
                 <thead>
                     <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Id Transaksi</th>
+                        <th scope="col">Id</th>
                         <th scope="col">Debit</th>
                         <th scope="col">Kredit</th>
                         <th scope="col">Saldo</th>
@@ -165,7 +169,6 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>-</td>
                     <td>-</td>
                     <td>Rp.{{$debit}},00</td>
                     <td>Rp.{{$kredit}},00</td>
@@ -191,13 +194,23 @@
                   @endif
                   @foreach($trxs as $trx)
                   <tr>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>Rp.{{$debit}},00</td>
-                    <td>Rp.{{$kredit}},00</td>
-                    <td>Rp.{{$saldo}},00</td>
-                    <td>-</td>
-                    <td>-</td>
+                    <td>{{$trx->id}}</td>
+                    <!-- Debit -->
+                    @if($trx->jenis_trx == "Simpanan")
+                    <td><?php echo rupiah($trx->nominal_trx);$saldo+=$trx->nominal_trx ?></td>
+                    @else
+                    <td>Rp.0,00</td>
+                    @endif
+                    <!-- Kredit -->
+                    @if($trx->jenis_trx == "Penarikan")
+                    <td><?php echo rupiah($trx->nominal_trx);$saldo-=$trx->nominal_trx ?>,00</td>
+                    @else
+                    <td>Rp.0,00</td>
+                    @endif
+                    <!-- Saldo -->
+                    <td><?php echo rupiah($saldo); ?></td>
+                    <td>{{$trx->tanggal}}</td>
+                    <td>{{$trx->jenis_trx}}</td>
                     <td>
                       <div class="dropdown custom-dropdown mb-0">
                         <div class="btn sharp btn-primary tp-btn" data-toggle="dropdown">

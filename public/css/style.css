@@ -28245,7 +28245,7 @@ span#counter {
 .new-arrival-content h4 {
   font-size: 16px;
   color: #828690;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-weight: 600;
   margin-bottom: 10px; }
 .new-arrival-content .price {

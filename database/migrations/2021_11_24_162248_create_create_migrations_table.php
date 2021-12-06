@@ -14,20 +14,11 @@ class CreateCreateMigrationsTable extends Migration
     public function up()
     {
         DB::unprepared("
-        CREATE OR REPLACE FUNCTION add_log_create_nasabah()
-        RETURNS trigger AS $$
-        BEGIN
-            INSERT INTO histories (user_id, log, created_at, updated_at) VALUES (NEW.id, 
-            'Akun user berhasil dibuat!' , NOW(), NOW());
-            RETURN NULL;
-        END
-        $$ LANGUAGE plpgsql;
-        
-        CREATE TRIGGER add_nasabah_log
-            AFTER INSERT ON users
-            FOR EACH ROW
-            EXECUTE PROCEDURE add_log_create_nasabah()
-        ");
+                CREATE TRIGGER tr_after_register_user AFTER INSERT ON users FOR EACH ROW
+                    BEGIN
+                        INSERT INTO histories (user_id, log, created_at, updated_at) VALUES (NEW.id, 'Akun user berhasil dibuat!', NOW(), NOW());
+                    END
+                ");
     }
 
     /**
@@ -37,9 +28,6 @@ class CreateCreateMigrationsTable extends Migration
      */
     public function down()
     { 
-        DB::unprepared('
-        DROP TRIGGER add_nasabah_log;
-        DROP FUNCTION add_log_create_nasabah;
-        ');
+        DB::unprepared("DROP TRIGGER tr_after_register_user");
     }
 }

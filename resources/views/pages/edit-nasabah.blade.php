@@ -70,7 +70,8 @@
                       <div class="col-lg-12 mb-3">
                         <div class="form-group">
                           <label class="text-label">Photo*</label>
-                          <img src="{{asset('../storage/'.$nasabah->file)}}" class="img-thumbnail row mb-3" id="update_image_nasabah">
+                          <img src="{{asset('../storage/'.$nasabah->file)}}" class="img-thumbnail row mb-3" id="update_image_nasabah" style=
+                          "height:250px;">
                           <div class="input-group mb-3">
                             <div class="custom-file">
                               <input type="text" class="form-control" id="check" name="check"  value="0" required style="display:none">
